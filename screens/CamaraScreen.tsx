@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Alert, Image, View, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+
 import { Ionicons } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
