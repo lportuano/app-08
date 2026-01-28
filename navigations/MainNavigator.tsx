@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import FontsScreen from '../screens/FontsScreen';
+import MapaScreen from '../screens/MapaScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,6 +20,18 @@ function MyTabs() {
                 }}
             />
             <Tab.Screen name="Galeria" component={GaleriaScreen}
+                options={{
+                    tabBarIcon: ({ color }) =>
+                        <MaterialCommunityIcons name="view-gallery" size={24} color="black" />
+                }}
+            />
+            <Tab.Screen name="Fonts" component={FontsScreen}
+                options={{
+                    tabBarIcon: ({ color }) =>
+                        <MaterialCommunityIcons name="view-gallery" size={24} color="black" />
+                }}
+            />
+            <Tab.Screen name="Mapa" component={MapaScreen}
                 options={{
                     tabBarIcon: ({ color }) =>
                         <MaterialCommunityIcons name="view-gallery" size={24} color="black" />

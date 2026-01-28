@@ -3,6 +3,8 @@ import { Alert, Button, Image, View, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { supabase } from '../supabase/config';
 
+import { File, Directory, Paths } from 'expo-file-system';
+
 export default function GaleriaScreen() {
     const [image, setImage] = useState<string | null>(null);
 
@@ -29,20 +31,37 @@ export default function GaleriaScreen() {
     };
 
     async function subirImagen() {
-        const avatarFile = image
+
+        if (!image) {
+            return false
+        }
+
+        //crear una instancia de file desde una imagen
+        const file = new File(image);
+
+        //transformar a una matriz de bits
+        const matrizBits = await file.bytes()
+
+
+        const avatarFile = matrizBits
         const { data, error } = await supabase
             .storage
             .from('jugadores')
-            .upload('usuarios/' + avatarFile, {
-                uri: image,
-                name: "imagen5.png"
-            } as any,
-                { contentType: "image/png" }
-            )
+            .upload('usuarios/avatar3.png', avatarFile, {
+                contentType: "image/png",
+                upsert: false
+            })
 
-        console.log(data);
-        console.log(error);
+        console.log(traerURL());
 
+    }
+
+    function traerURL() {
+        const { data } = supabase
+            .storage
+            .from('jugadores')
+            .getPublicUrl('usuarios/avatar3.png')
+        return data.publicUrl
     }
 
     return (
